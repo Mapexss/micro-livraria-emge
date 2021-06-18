@@ -52,6 +52,18 @@ app.get('/product/:id', (req, res, next) => {
         }
     });
 });
+
+app.get('/books/:id/:isSomar', (req, res, next) => {
+    inventory.ChangeInventory({ id: req.params.id, isSomar: req.params.isSomar }, (err, product) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ error: 'something failed :(' });
+        } else {
+            res.json(product);
+        }
+    });
+});
+
 /**
  * Inicia o router
  */
